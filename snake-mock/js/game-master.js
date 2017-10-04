@@ -45,6 +45,7 @@ class GameMaster {
 
         this.readInput();
         this.canvas       = document.getElementById("game_canvas");
+        this.ctx          = this.canvas.getContext('2d');
         this.menu         = null;
         this.gameState    = null;
         this.gameStarted  = null;
@@ -99,10 +100,7 @@ class GameMaster {
         let self = this;
         document.addEventListener('keydown', function (evt) {
             self.input = evt.which;
-        });
-
-        document.addEventListener('keyup', function () {
-            self.input = null;
+            self.updateMenu(evt.which);
         });
     }
 
@@ -178,11 +176,10 @@ class GameMaster {
         this.initializeGame();
     }
 
-    updateMenu(ctx) {
-        let input = this.input;
+    updateMenu(input) {
         let menu  = this.menu;
         //Navigate through menu and actualize sprite
-        menu.draw(ctx);
+        menu.draw(this.ctx);
         if (!menu._fading) {
             menu.navigateOptions(input);
             if (input !== 13) {

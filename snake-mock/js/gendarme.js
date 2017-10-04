@@ -22,7 +22,7 @@ class Gendarme extends Entity {
     }
 
     initEvents() {
-        document.addEventListener('keyup', (ev) => {
+        document.addEventListener('keydown', (ev) => {
             this.updateDirection(ev.which);
         });
     }
